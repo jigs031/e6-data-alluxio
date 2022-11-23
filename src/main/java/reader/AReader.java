@@ -24,6 +24,7 @@ class AlluxioFileReader implements Runnable {
 
         FSDataInputStream in = null;
         try {
+                System.out.println("Reading the File: "+this.filePath.toString());
                 ParquetFileReader reader = ParquetFileReader.open(this.fs.getConf(),this.filePath);
                 PageReadStore pages;
                 while ((pages = reader.readNextRowGroup()) != null) {
@@ -71,11 +72,9 @@ public class AReader {
             LocatedFileStatus fileStatus = fileStatusListIterator.next();
             //System.out.println(fileStatus.getPath());
             if (!fileStatus.getPath().toString().contains("_SUCCESS")){
-
-
-            AlluxioFileReader reader=new AlluxioFileReader(fs,fileStatus.getPath());
-            pool.execute(reader);
-            totalFiles++;
+                AlluxioFileReader reader=new AlluxioFileReader(fs,fileStatus.getPath());
+                pool.execute(reader);
+                totalFiles++;
             }
         }
 

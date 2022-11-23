@@ -24,7 +24,7 @@ public class AlluxioReaderMultithread {
 
     public static void alluxio_read_performance(String filePath) throws IOException {
         long startTime = System.currentTimeMillis();
-        ParquetFileReader reader = null; // ParquetFileReader.open(HadoopInputFile.fromPath(new Path(filePath), new Configuration()));
+        ParquetFileReader reader = null ; //ParquetFileReader.open(HadoopInputFile.fromPath(new Path(filePath), new Configuration()));
         MessageType schema = reader.getFooter().getFileMetaData().getSchema();
         List<Type> fields = schema.getFields();
         PageReadStore pages;
