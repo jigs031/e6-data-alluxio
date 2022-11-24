@@ -67,6 +67,7 @@ public class S3Reader {
         S3AFileSystem fs = new S3AFileSystem();
         Path path=new Path(pathStr);
         Configuration conf=new Configuration();
+        conf.set("fs.s3a.connection.maximum","100");
         fs.initialize(path.toUri(),conf);
 
 
