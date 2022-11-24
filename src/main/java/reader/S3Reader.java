@@ -35,6 +35,7 @@ class S3FileReader implements Runnable {
                     long rows = pages.getRowCount();
                     System.out.println(rows);
                 }
+                reader.close();
 
             System.out.println("File Size: "+this.filePath.toString()+":");
 
