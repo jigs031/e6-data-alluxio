@@ -1,12 +1,7 @@
 package reader;
 
-import alluxio.hadoop.FileSystem;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
@@ -32,7 +27,7 @@ class S3FileReader implements Runnable {
     @Override
     public void run() {
 
-        FSDataInputStream in = null;
+
         try {
                 ParquetFileReader reader = ParquetFileReader.open(this.fs.getConf(),this.filePath);
                 PageReadStore pages;
@@ -68,7 +63,7 @@ public class S3Reader {
         Path path=new Path(pathStr);
         Configuration conf=new Configuration();
         conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem");
-        conf.set("fs.s3a.connection.maximum","50");
+        conf.set("fs.s3a.connection.maximum","36");
         fs.initialize(path.toUri(),conf);
 
 
