@@ -1,20 +1,22 @@
 package reader;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.*;
-import org.apache.hadoop.fs.Path;
 import alluxio.hadoop.FileSystem;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.LocatedFileStatus;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.RemoteIterator;
 import org.apache.parquet.column.page.PageReadStore;
+import org.apache.parquet.hadoop.ParquetFileReader;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.apache.parquet.hadoop.ParquetFileReader;
-import org.apache.parquet.hadoop.util.HadoopInputFile;
 
-class AlluxioFileReader implements Runnable {
+class S3FileReader implements Runnable {
     FileSystem fs=null;
     Path filePath;
-    public AlluxioFileReader(FileSystem fs , Path filePath){
+    public S3FileReader(FileSystem fs , Path filePath){
         this.fs=fs;
         this.filePath=filePath;
     }
@@ -39,7 +41,7 @@ class AlluxioFileReader implements Runnable {
     }
 }
 
-public class AReader {
+public class S3Reader {
     public  static  void main(String[] args) throws IOException {
 
         if (args.length<1){
@@ -54,7 +56,7 @@ public class AReader {
 
 
         //part-00000-e7d59cb6-125c-436e-a76a-f2d604e401ae-c000.snappy.parquet
-        FileSystem fs = new alluxio.hadoop.FileSystem();
+        FileSystem fs = new FileSystem();
         Path path=new Path(pathStr);
         Configuration conf=new Configuration();
         fs.initialize(path.toUri(),conf);
