@@ -1,6 +1,8 @@
 package reader;
 
 import org.apache.hadoop.conf.Configuration;
+
+import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.fs.Path;
 import alluxio.hadoop.FileSystem;
@@ -57,6 +59,7 @@ public class AReader {
         FileSystem fs = new alluxio.hadoop.FileSystem();
         Path path=new Path(pathStr);
         Configuration conf=new Configuration();
+        conf.set("io.file.buffer.size","8192");
         fs.initialize(path.toUri(),conf);
 
 
