@@ -59,7 +59,7 @@ public class AReader {
         FileSystem fs = new alluxio.hadoop.FileSystem();
         Path path=new Path(pathStr);
         Configuration conf=new Configuration();
-        //conf.set("io.file.buffer.size","8192");
+        conf.set("io.file.buffer.size","12000");
         fs.initialize(path.toUri(),conf);
 
 
